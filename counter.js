@@ -5,6 +5,15 @@ function increment(){
     count += 1;
     countEl.innerText = count;
 }
+function save(){
+    let countEl = document.getElementById("count-el");
+    let count = parseInt(countEl.innerText);
+    let saveEl = document.getElementById("save-el");
+    let countStr = count + " - ";
+    saveEl.innerText += countStr;
+    countEl.innerText = 0;
+}
+
 
 // Hamburger Menu Toggle Function
 function toggleMenu() {
