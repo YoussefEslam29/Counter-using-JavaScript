@@ -19,28 +19,45 @@
       <nav class="menu" id="menu">
         <a href="#">Home</a>
         <a href="about.html">About</a>
-        <a href="Pro-Timer.html">Pro-Timer</a>
-        <a href="smart-counter.html">Smart Counter</a>
-        <a href="the-classic-clicker.html">The Classic Clicker</a>
       </nav>
     </div>
     <!-- End of Hamburger Menu -->
 
     <header>
-      <article>
-        <h1>Counter App</h1>
-        <p>Click the button to increase the count.</p>
-      </article>
-      <h1>People entered:</h1>
+      <h1>Counter App</h1>
     </header>
 
     <main>
-      <h2 id="count-el">0</h2>
-      <button id="increment-btn" onclick="increment()">INCREMENT</button>
-      <button id="save-btn" onclick="save()">SAVE</button>
-      <button id="reset-btn" onclick="reset()">RESET</button>
-      <button id="clear-btn" onclick="clearEntries()">CLEAR ENTRIES</button>
-      <p id="save-el">Previous entires: </p>
+      <!-- Classic Clicker Section -->
+      <div id="classic-count">
+        <h2>Classic Clicker</h2>
+        <h3>People entered:</h3>
+        <h2 id="count-el">0</h2>
+        <button id="increment-btn" onclick="increment()">INCREMENT</button>
+        <button id="save-btn" onclick="save()">SAVE</button>
+        <button id="reset-btn" onclick="reset()">RESET</button>
+        <button id="clear-btn" onclick="clearEntries()">CLEAR ENTRIES</button>
+        <p id="save-el">Previous entires: </p>
+      </div>
+      <!-- End of Classic Clicker Section -->
+      <!-- Smart Counter Section -->
+      <div class="container">
+        <h2>Smart Counter</h2>
+        <h1 id="value">0</h1>
+            
+        <div class="input-group">
+          <label for="step">Step Value:</label>
+          <input type="number" id="step" value="1" min="1">
+        </div>
+
+        <div class="button-container">
+        <button class="btn" data-action="decrease">Decrease</button>
+        <button class="btn" data-action="reset">Reset</button>
+        <button class="btn" data-action="increase">Increase</button>
+        </div>
+      </div>
+      <!-- End of Smart Counter Section -->
+
     </main>
 
     <footer>
