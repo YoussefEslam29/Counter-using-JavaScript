@@ -66,9 +66,16 @@ let timeLeft = 1500; // 25 minutes in seconds
 let timerId = null;
 
 const display = document.querySelector('#timer-display');
+const timerInput = document.querySelector('#timer-minutes');
 const startBtn = document.querySelector('#start');
 const pauseBtn = document.querySelector('#pause');
 const resetBtn = document.querySelector('#reset');
+
+// Function to get timer duration from input
+function getTimerDuration() {
+  const minutes = parseInt(timerInput.value) || 25;
+  return minutes * 60; // Convert to seconds
+}
 
 function updateDisplay() {
   const minutes = Math.floor(timeLeft / 60);
@@ -104,6 +111,18 @@ pauseBtn.addEventListener('click', () => {
 resetBtn.addEventListener('click', () => {
   clearInterval(timerId);
   timerId = null;
-  timeLeft = 1500;
+  timeLeft = getTimerDuration();
   updateDisplay();
 });
+
+// Update timer when input value changes
+timerInput.addEventListener('input', () => {
+  if (timerId === null) { // Only update if timer is not running
+    timeLeft = getTimerDuration();
+    updateDisplay();
+  }
+});
+
+// Initialize display with default value
+timeLeft = getTimerDuration();
+updateDisplay();
