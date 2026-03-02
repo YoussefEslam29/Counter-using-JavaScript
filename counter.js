@@ -30,34 +30,37 @@ function clearEntries(){
 //2) Level 2: Smart Counter Section
 //========================================
 
-let count2 = parseInt(localStorage.getItem("myCount")) || 0;
+let count2 = parseInt(localStorage.getItem("myCount"), 10) || 0;
 const value = document.querySelector("#value");
 const stepInput = document.querySelector("#step");
 const btns = document.querySelectorAll(".btn");
 
-updateUI();
-
-btns.forEach((btn) => {
-  btn.addEventListener("click", (e) => {
-  const action = e.currentTarget.dataset.action;
-  const step = parseInt(stepInput.value) || 1;
-
-  if (action === "increase") count2 += step;
-  else if (action === "decrease") count2 -= step;
-  else count2 = 0;
-
-  localStorage.setItem("myCount", count2);
-  updateUI();
-  });
-});
-
 function updateUI() {
+  if (!value) return;
   value.textContent = count2;
   if (count2 > 0) value.style.color = "#27ae60"; 
   else if (count2 < 0) value.style.color = "#e74c3c";
   else value.style.color = "#2c3e50"; 
 }
 
+if (value && stepInput && btns.length) {
+  updateUI();
+
+  btns.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      const action = e.currentTarget.dataset.action;
+      const step = Math.abs(parseInt(stepInput.value, 10)) || 1;
+
+      if (action === "increase") count2 += step;
+      else if (action === "decrease") count2 -= step;
+      else if (action === "reset") count2 = 0;
+      else return;
+
+      localStorage.setItem("myCount", count2);
+      updateUI();
+    });
+  });
+}
 
 //========================================
 //3) Level 3: Productivity Timer (Pomodoro)
