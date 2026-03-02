@@ -1,3 +1,5 @@
+//1) Level 1: Basic Counter Section
+
 let countEl = document.getElementById("count-el");
 let saveEl = document.getElementById("save-el");
 
@@ -21,27 +23,9 @@ function clearEntries(){
 }
 
 
-// Hamburger Menu Toggle Function
-function toggleMenu() {
-    const menu = document.getElementById('menu');
-    const hamburgerBtn = document.querySelector('.hamburger-btn');
-    
-    menu.classList.toggle('show');
-    hamburgerBtn.classList.toggle('active');
-}
+//2)level 2: smart counter section
 
-// Close menu when clicking outside
-document.addEventListener('click', function(event) {
-    const menu = document.getElementById('menu');
-    const hamburgerMenu = document.querySelector('.hamburger-menu');
-    
-    if (!hamburgerMenu.contains(event.target) && menu.classList.contains('show')) {
-        menu.classList.remove('show');
-        document.querySelector('.hamburger-btn').classList.remove('active');
-    }
-});
 
-//smart counter section
 // 1. Initialize count from localStorage OR start at 0
 count = parseInt(localStorage.getItem("myCount")) || 0;
 
@@ -72,7 +56,54 @@ function updateUI() {
   value.textContent = count;
 
   // 3. Dynamic Styling Logic
-  if (count > 0) value.style.color = "#27ae60"; // Green
-  else if (count < 0) value.style.color = "#e74c3c"; // Red
-  else value.style.color = "#2c3e50"; // Dark Grey
+  if (count > 0) value.style.color = "#27ae60"; 
+  else if (count < 0) value.style.color = "#e74c3c";
+  else value.style.color = "#2c3e50"; 
 }
+
+//3) Level 3: The Productivity Timer (Pomodoro)
+let timeLeft = 1500; // 25 minutes in seconds
+let timerId = null;
+
+const display = document.querySelector('#timer-display');
+const startBtn = document.querySelector('#start');
+const pauseBtn = document.querySelector('#pause');
+const resetBtn = document.querySelector('#reset');
+
+function updateDisplay() {
+  const minutes = Math.floor(timeLeft / 60);
+  const seconds = timeLeft % 60;
+  
+  // String Padding: Ensures "9" seconds shows as "09"
+  const displaySeconds = seconds < 10 ? `0${seconds}` : seconds;
+  const displayMinutes = minutes < 10 ? `0${minutes}` : minutes;
+  
+  display.textContent = `${displayMinutes}:${displaySeconds}`;
+}
+
+startBtn.addEventListener('click', () => {
+  if (timerId !== null) return; // Prevent multiple timers starting at once
+
+  timerId = setInterval(() => {
+    timeLeft--;
+    updateDisplay();
+
+    if (timeLeft === 0) {
+      clearInterval(timerId);
+      timerId = null;
+      alert("Time's up! Take a break.");
+    }
+  }, 1000);
+});
+
+pauseBtn.addEventListener('click', () => {
+  clearInterval(timerId);
+  timerId = null;
+});
+
+resetBtn.addEventListener('click', () => {
+  clearInterval(timerId);
+  timerId = null;
+  timeLeft = 1500;
+  updateDisplay();
+});
