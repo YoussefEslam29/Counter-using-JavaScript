@@ -1,17 +1,17 @@
+let countEl = document.getElementById("count-el");
+let saveEl = document.getElementById("save-el");
+let count = 0;
+
 function increment(){
-    console.log("A7A");
-    let countEl = document.getElementById("count-el");
-    let count = parseInt(countEl.innerText);
     count += 1;
     countEl.innerText = count;
 }
+
 function save(){
-    let countEl = document.getElementById("count-el");
-    let count = parseInt(countEl.innerText);
-    let saveEl = document.getElementById("save-el");
     let countStr = count + " - ";
     saveEl.innerText += countStr;
-    countEl.innerText = 0;
+    count = 0;
+    countEl.innerText = count;
 }
 
 
@@ -34,3 +34,4 @@ document.addEventListener('click', function(event) {
         document.querySelector('.hamburger-btn').classList.remove('active');
     }
 });
+
