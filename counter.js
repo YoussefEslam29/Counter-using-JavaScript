@@ -41,3 +41,38 @@ document.addEventListener('click', function(event) {
     }
 });
 
+//smart counter section
+// 1. Initialize count from localStorage OR start at 0
+count = parseInt(localStorage.getItem("myCount")) || 0;
+
+const value = document.querySelector("#value");
+const stepInput = document.querySelector("#step");
+const btns = document.querySelectorAll(".btn");
+
+// Initial UI update to show saved value
+updateUI();
+
+btns.forEach((btn) => {
+  btn.addEventListener("click", (e) => {
+    const action = e.currentTarget.dataset.action;
+    const step = parseInt(stepInput.value) || 1;
+
+    if (action === "increase") count += step;
+    else if (action === "decrease") count -= step;
+    else count = 0;
+
+    // 2. Save new count to localStorage
+    localStorage.setItem("myCount", count);
+    
+    updateUI();
+  });
+});
+
+function updateUI() {
+  value.textContent = count;
+
+  // 3. Dynamic Styling Logic
+  if (count > 0) value.style.color = "#27ae60"; // Green
+  else if (count < 0) value.style.color = "#e74c3c"; // Red
+  else value.style.color = "#2c3e50"; // Dark Grey
+}
