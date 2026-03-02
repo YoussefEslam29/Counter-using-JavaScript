@@ -1,5 +1,6 @@
 let countEl = document.getElementById("count-el");
 let saveEl = document.getElementById("save-el");
+
 let count = 0;
 
 function increment(){
@@ -9,7 +10,14 @@ function increment(){
 
 function save(){
     let countStr = count + " - ";
-    saveEl.innerText += countStr;
+    saveEl.textContent += countStr;
+}
+function reset(){
+    count = 0;
+    countEl.innerText = count;
+}
+function clearEntries(){
+    saveEl.textContent = "Previous entires: ";
 }
 
 

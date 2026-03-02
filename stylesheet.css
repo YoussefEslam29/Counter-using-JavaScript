@@ -35,6 +35,12 @@ button {
 #save-btn {
     background: darkgreen;
 }
+#reset-btn {
+    background: darkblue;
+}
+#clear-btn {
+    background: darkorange;
+}
 
 /* Hamburger Menu Styles */
 .hamburger-menu {
